@@ -34,21 +34,13 @@ bot.on('start', () => {
 });
 
 bot.on('message', (data) => {
+  console.log(data);
   const { type, text, channel } = data;
 
-  console.log(data);
-  console.log(bot.getChannels()._value.channels[0]);
-
   if (type === 'message') {
-    console.log("Text: ", text);
-
     if (text) {
       if (text.toLowerCase().indexOf('should') > -1) {
-        const channels = bot.getChannels()._value.channels.filter((item) => {
-          return item.id = channel;
-        });
-
-        bot.postMessageToChannel(channels[0].name, 'DO IT!', params);
+        bot.postMessageToChannel(channel, 'DO IT!', params);
       }
     }
   }
