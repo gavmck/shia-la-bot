@@ -1,30 +1,28 @@
-var boykey = require('./key').botkey;
-
-var SlackBot = require('slackbots');
+import 'babel-register';
+import { token } from './token';
+import SlackBot from 'slackbots';
 
 // create a bot
-var bot = new SlackBot({
-    token: botkey,
-    name: 'Shia La Bot'
+const bot = new SlackBot({
+  token,
+  name: 'Shia La Bot'
 });
 
-bot.on('start', function() {
+bot.on('start', () => {
 
-    bot.on('message', function(data) {
-        // all ingoing events https://api.slack.com/rtm
-        //console.log(data);
+  bot.on('message', (data) => {
 
-        if (data.type == 'message') {
-            var text = data.text;
-            console.log("Text: ", text);
+    if (data.type === 'message') {
+      const text = data.text;
+      console.log("Text: ", text);
 
-            if (text) {
-                text = text.toLowerCase();
+      if (text) {
+        text = text.toLowerCase();
 
-                if (text.indexOf('should') > -1) {
-                    bot.postMessageToChannel('general', 'DO IT!');
-                }
-            }
+        if (text.indexOf('should') > -1) {
+          bot.postMessageToChannel('general', 'DO IT!');
         }
-    });
+      }
+    }
+  });
 });
